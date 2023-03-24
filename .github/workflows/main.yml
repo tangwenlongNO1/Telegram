@@ -1,0 +1,53 @@
+name: Telegram bot
+
+on:
+
+  #push:
+
+  #  branches: [ main ]
+
+  #pull_request:
+
+  #  branches: [ main ]
+
+ 
+
+  watch:
+
+    types: started
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout codes
+
+        uses: actions/checkout@v2
+
+          
+
+      - name: 初始化Python
+
+        uses: actions/setup-python@v2
+
+        with:
+
+          python-version: 3.8
+
+          
+
+      - name: 开始
+
+        run: |
+
+          pip3 install python-telegram-bot
+
+          token='${{ secrets.TOKEN }}'
+
+          python3 main.py ${token}
