@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, filters, ContextTypes, ApplicationBuilder
 
-TOKEN = '6255056539:AAGiplqI0cbCx5m2wOtn1niq_LDL7eihD-k'  # 用你自己的 bot token 替换掉 'TOKEN'
+TOKEN = ''  # 用你自己的 bot token 替换掉 'TOKEN'
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -21,7 +21,7 @@ async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('6255056539:AAGiplqI0cbCx5m2wOtn1niq_LDL7eihD-k').build()
+    application = ApplicationBuilder().token('').build()
 
     start_handler = CommandHandler('start', start)
     help_handler = CommandHandler('help', help)
