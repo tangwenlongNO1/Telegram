@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, filters, ContextTypes, ApplicationBuilder
-
-TOKEN = ''  # 用你自己的 bot token 替换掉 'TOKEN'
+import sys
+TOKEN = sys.argv[1]  # 用你自己的 bot token 替换掉 'TOKEN'
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
