@@ -21,7 +21,7 @@ async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('').build()
+    application = ApplicationBuilder().token('6255056539:AAGiplqI0cbCx5m2wOtn1niq_LDL7eihD-k').build()
 
     start_handler = CommandHandler('start', start)
     help_handler = CommandHandler('help', help)
