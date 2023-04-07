@@ -1,59 +1,44 @@
-#########################
-#####   tg机器人   ######
-#########################
-import logging
-
+import os
 import requests
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters, ContextTypes, ApplicationBuilder
-import sys
+from dotenv import load_dotenv,set_key
+from github import Github
+load_dotenv()
 
-# TOKEN = sys.argv[1]  # 用你自己的 bot token 替换掉 'TOKEN'
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
+g = Github(os.environ.get("token"))
+repo_name = "mimotion"
+username = "tangwenlongNO1"
+repo = g.get_user(username).get_repo(repo_name)
 
+# 获取当前最新版本的 Clash For Windows Chinese_patch 下载链接和更新日志
+response = requests.get("https://api.github.com/repos/BoyceLig/Clash_Chinese_Patch/releases/latest")
+print(response.status_code)
+data = response.json()
+latest_version = data['tag_name']
+latest_download_url = data['assets'][0]['browser_download_url']
+latest_changelog = data['body']
+re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
+dt = re.json()
+sha = dt['sha']
 
-def weather():
-    r = requests.get('http://www.weather.com.cn/data/sk/101250101.html')
-    r.encoding = 'utf-8'
-    # print(r.json()['weatherinfo']['city'], r.json()['weatherinfo']['WD'], r.json()['weatherinfo']['temp'])
-    return r.json()['weatherinfo']['city'] + "今天天气" + r.json()['weatherinfo']['WD'] + "  温度" + r.json()['weatherinfo'][
-        'temp']
+# 推送更新通知到 Telegram
+telegram_bot_token = os.environ.get('TG_TOKEN')
+telegram_chat_id = os.environ.get('TG_CHAT_ID')
+current_version = os.getenv('version')
+telegram_api_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
+if latest_version != current_version:
 
+    message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n{latest_changelog}\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
+    params = {
+        "chat_id":telegram_chat_id,
+        "text":message_text,
+        "parse_mode":'Markdown',
+        "disable_web_page_preview":True
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="start notification！")
-
-
-async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="/start 开始消息推送\n/help 查看帮助\n/weather 查看天气")
-
-
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
-
-
-async def getweather(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text=weather())
-
-
-async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
-
-
-if __name__ == '__main__':
-    application = ApplicationBuilder().token('6255056539:AAGiplqI0cbCx5m2wOtn1niq_LDL7eihD-k').get_updates_http_version('1.1').http_version('1.1').build()
-
-    start_handler = CommandHandler('start', start)
-    help_handler = CommandHandler('help', help)
-    weather_handler = CommandHandler('weather', getweather)  # 命令写在过滤器上面
-    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
-    unknown_handler = MessageHandler(filters.COMMAND, unknown)
-    application.add_handler(start_handler)
-    application.add_handler(help_handler)
-    application.add_handler(weather_handler)
-    application.add_handler(echo_handler)
-    application.add_handler(unknown_handler)
-    application.run_polling()
+    }
+    response = requests.post(telegram_api_url, data=params)
+    print(response.status_code)
+    with open('.env', 'w') as f:
+        f.write(f"version={latest_version}")
+    with open('.env', 'r') as f:
+        contents = f.read()
+    repo.update_file(".env", "update .env", contents, sha, branch="master")
