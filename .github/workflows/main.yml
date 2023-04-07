@@ -1,4 +1,4 @@
-name: Clash-for-Windows Update Check
+name: Clash-for-Windows Chinese patch Update Check
 
 on:
   schedule: 
