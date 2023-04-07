@@ -1,54 +1,32 @@
-name: Telegram bot
+name: Clash-for-Windows Update Check
 
 on:
-
-  #push:
-
-  #  branches: [ main ]
-
-  #pull_request:
-
-  #  branches: [ main ]
-
- 
-
-  watch:
-
-    types: started
+  schedule: 
+    - cron: '0 2/2 * * *'
 
   workflow_dispatch:
 
+
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
+  update:
+    runs-on: windows-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Checkout codes
+    - name: Set python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
 
-        uses: actions/checkout@v2
+    - name: Install requirements
+      run: pip install requests python-dotenv PyGithub
 
-          
-
-      - name: 初始化Python
-
-        uses: actions/setup-python@v2
-
-        with:
-
-          python-version: 3.8
-
-          
-
-      - name: 开始
-
-        run: |
-
-          pip3 install python-telegram-bot
-          pip3 install requests
-
-          token='${{ secrets.TOKEN }}'
-
-          python3 main.py ${token}
+    - name: Run Python Script
+      run: 
+        python main.py
+env:
+  TG_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+  TG_CHAT_ID: ${{ secrets.CHANNEL_ID }}
+  token: ${{ secrets.PAT }}
