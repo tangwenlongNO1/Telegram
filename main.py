@@ -5,7 +5,7 @@ from github import Github
 load_dotenv()
 
 g = Github(os.environ.get("token"))
-repo_name = "mimotion"
+repo_name = "Telegram"
 username = "tangwenlongNO1"
 repo = g.get_user(username).get_repo(repo_name)
 
