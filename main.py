@@ -27,7 +27,7 @@ current_version = os.getenv('version')
 telegram_api_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
 if latest_version != current_version:
 
-    message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n{latest_changelog}\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
+    message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n{latest_download_url}\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
     params = {
         "chat_id":telegram_chat_id,
         "text":message_text,
