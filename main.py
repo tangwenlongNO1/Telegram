@@ -15,10 +15,6 @@ print(response.status_code)
 data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
-r = requests.get(latest_download_url)
-filename = os.path.basename(latest_download_url)
-with open(filename, 'wb') as f:
-    f.write(r.content)
 latest_changelog = data['body']
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
@@ -29,10 +25,9 @@ telegram_bot_token = os.environ.get('TG_TOKEN')
 telegram_chat_id = os.environ.get('TG_CHAT_ID')
 current_version = os.getenv('version')
 telegram_api_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
-telegram_api_url1 = f"https://api.telegram.org/bot{telegram_bot_token}/sendDocument"
 if latest_version != current_version:
     
-    message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n{latest_download_url}\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
+    message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n*汉化方法：*\n\n下载 `app.7z` 或 `app.zip` 文件(*两个压缩包内容一样*)后，解压压缩包，请自行替换下列路径中的 `app.asar` 文件\n\n`Clash for Windows\\resources\\app.asar`\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
     params = {
         "chat_id":telegram_chat_id,
         "text":message_text,
@@ -41,7 +36,6 @@ if latest_version != current_version:
 
     }
     response = requests.post(telegram_api_url, data=params)
-    response1 = requests.post(telegram_api_url1, data={"chat_id":telegram_chat_id,"document":open(filename, 'rb')})
     print(response1.status_code)
     with open('.env', 'w') as f:
         f.write(f"version={latest_version}")
