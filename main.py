@@ -15,6 +15,7 @@ print(response.status_code)
 data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
+filename = os.path.basename(latest_download_url)
 latest_changelog = data['body']
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
@@ -37,7 +38,7 @@ if latest_version != current_version:
 
     }
     response = requests.post(telegram_api_url, data=params)
-    response = requests.post(telegram_api_url, data={"chat_id":telegram_chat_id,"document":open(latest_download_url, 'rb')})
+    response = requests.post(telegram_api_url, data={"chat_id":telegram_chat_id,"document":open(filename, 'rb')})
     print(response.status_code)
     with open('.env', 'w') as f:
         f.write(f"version={latest_version}")
