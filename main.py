@@ -15,9 +15,10 @@ print(response.status_code)
 data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
+r = requests.get(latest_download_url)
 filename = os.path.basename(latest_download_url)
 with open(filename, 'wb') as f:
-    f.write(response.content)
+    f.write(r.content)
 latest_changelog = data['body']
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
