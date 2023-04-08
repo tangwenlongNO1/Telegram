@@ -37,7 +37,7 @@ if latest_version != current_version:
 
     }
     response = requests.post(telegram_api_url, data=params)
-    response = requests.post(telegram_api_url, data={"chat_id":telegram_chat_id,"document":latest_download_url})
+    response = requests.post(telegram_api_url, data={"chat_id":telegram_chat_id,"document":open(latest_download_url, 'rb')})
     print(response.status_code)
     with open('.env', 'w') as f:
         f.write(f"version={latest_version}")
