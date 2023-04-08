@@ -14,7 +14,7 @@ response = requests.get("https://api.github.com/repos/BoyceLig/Clash_Chinese_Pat
 print(response.status_code)
 data = response.json()
 latest_version = data['tag_name']
-latest_download_url = data['assets'][0]['browser_download_url']
+latest_download_url = data['assets'][1]['browser_download_url']
 latest_changelog = data['body']
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
