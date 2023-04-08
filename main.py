@@ -25,8 +25,9 @@ telegram_bot_token = os.environ.get('TG_TOKEN')
 telegram_chat_id = os.environ.get('TG_CHAT_ID')
 current_version = os.getenv('version')
 telegram_api_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
+telegram_api_url1 = f"https://api.telegram.org/bot{telegram_bot_token}/sendDocument"
 if latest_version != current_version:
-
+    
     message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n{latest_download_url}\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
     params = {
         "chat_id":telegram_chat_id,
@@ -36,6 +37,7 @@ if latest_version != current_version:
 
     }
     response = requests.post(telegram_api_url, data=params)
+    response = requests.post(telegram_api_url, data={"chat_id":telegram_chat_id,"document":latest_download_url})
     print(response.status_code)
     with open('.env', 'w') as f:
         f.write(f"version={latest_version}")
