@@ -11,7 +11,7 @@ rss_feed_url = 'https://www.141jav.com/feeds/'
 def fetch_latest_article():
     feed = feedparser.parse(rss_feed_url)
     latest_entry = feed.entries[0]
-    return f"{latest_entry.title}\n{latest_entry.link}"
+    return f"{latest_entry.title}\n{latest_entry.description}\n{latest_entry.link}"
 
 def send_message(message):
     url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
