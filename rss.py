@@ -14,8 +14,8 @@ def fetch_latest_article():
     return f"{latest_entry.title}\n{latest_entry.link}"
 
 def send_message(message):
-    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
-    params = {'chat_id': channel_id, 'text': message}
+    url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
+    params = {'chat_id': telegram_chat_id, 'text': message}
     response = requests.post(url, params=params)
     return response.json()
 
