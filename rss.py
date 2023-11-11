@@ -6,7 +6,7 @@ import os
 telegram_bot_token = os.environ.get('TG_TOKEN')
 telegram_chat_id = os.environ.get('TG_CHAT_ID')
 # RSS订阅的URL
-rss_feed_url = 'YOUR_RSS_FEED_URL'
+rss_feed_url = 'https://rsshub.app/3dmgame/news'
 
 def fetch_latest_article():
     feed = feedparser.parse(rss_feed_url)
