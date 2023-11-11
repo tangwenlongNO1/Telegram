@@ -1,10 +1,10 @@
 import feedparser
 import requests
+import os
 
 # 你的Telegram Bot API令牌
-bot_token = 'YOUR_BOT_TOKEN'
-# 你的频道ID
-channel_id = '@your_channel_id'
+telegram_bot_token = os.environ.get('TG_TOKEN')
+telegram_chat_id = os.environ.get('TG_CHAT_ID')
 # RSS订阅的URL
 rss_feed_url = 'YOUR_RSS_FEED_URL'
 
