@@ -1,4 +1,4 @@
-name: Clash-for-Windows Chinese patch Update Check
+name: rss test
 
 on:
   # schedule: 
@@ -21,11 +21,11 @@ jobs:
         python-version: 3.8
 
     - name: Install requirements
-      run: pip install requests python-dotenv PyGithub
+      run: pip install requests python-dotenv PyGithub feedparser
 
     - name: Run Python Script
       run: 
-        python main.py
+        python rss.py
 env:
   TG_TOKEN: ${{ secrets.TOKEN }}
   TG_CHAT_ID: ${{ secrets.CHANNEL_ID }}
