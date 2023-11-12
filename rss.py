@@ -21,7 +21,7 @@ rss_feed_url = 'https://www.141jav.com/feeds/'
 
 def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url)
-    items = feed.entries
+    items = feed.entries[:5]
     return items
 
 def send_message(items):
@@ -36,7 +36,7 @@ def send_message(items):
 
     # 发送合并的消息
     url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
-    params = {'chat_id': telegram_chat_id, 'text': message, 'parse_mode': 'MarkdownV2', 'disable_web_page_preview': False}
+    params = {'chat_id': telegram_chat_id, 'text': message, 'parse_mode': 'Markdown', 'disable_web_page_preview': False}
     response = requests.post(url, params=params)
     return response.json()
 
