@@ -32,7 +32,7 @@ def send_message(items):
         item_description = item.description # if hasattr(item, 'description') else ""
         
         # 将每个项的标题、链接和描述添加到消息中
-        message += f"**{item_title}**\n\n{item_description}\n[Read more]({item_link})\n\n"
+        message += f"*{item_title}*\n\n🧩 {item_description}\n[Read more]({item_link})\n\n"
 
     # 发送合并的消息
     url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
