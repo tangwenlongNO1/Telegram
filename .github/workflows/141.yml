@@ -1,0 +1,32 @@
+name: rss 141 test
+
+on:
+  schedule: 
+    - cron: '0 7 * * *'
+
+  workflow_dispatch:
+
+
+jobs:
+  update:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install requirements
+      run: pip install requests feedparser
+
+    - name: Run Python Script
+      run: 
+        python rss.py
+env:
+  TG_TOKEN: ${{ secrets.TOKEN }}
+  TG_CHAT_ID: ${{ secrets.CHANNEL_ID }}
+  token: ${{ secrets.PAT }}
