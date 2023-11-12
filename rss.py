@@ -16,7 +16,7 @@ def fetch_latest_items():
 
 def send_message(message):
     url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
-    params = {'chat_id': telegram_chat_id, 'text': message, 'parse_mode': 'HTML'}
+    params = {'chat_id': telegram_chat_id, 'text': message}
     response = requests.post(url, params=params)
     return response.json()
 
