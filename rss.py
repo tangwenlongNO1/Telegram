@@ -12,11 +12,11 @@ rss_feed_url1 = 'https://rsshub.app/1x/latest'
 def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url1)
     latest_entry = feed.entries[0]
-    return f"{latest_entry.title}\n{latest_entry.description}\n{latest_entry.link}"
+    return f"{latest_entry.description[10:-4]}"
 
 def send_message(message):
-    url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
-    params = {'chat_id': telegram_chat_id, 'text': message}
+    url = f'https://api.telegram.org/bot{telegram_bot_token}/sendPhoto'
+    params = {'chat_id': telegram_chat_id, 'photo': message}
     response = requests.post(url, params=params)
     return response.json()
 
