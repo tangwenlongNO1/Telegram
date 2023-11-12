@@ -29,7 +29,7 @@ def send_message(items):
     for item in items:
         item_title = item.title
         item_link = item.link
-        item_description = item.description if hasattr(item, 'description') else ""
+        # item_description = item.description if hasattr(item, 'description') else ""
         
         # 将每个项的标题、链接和描述添加到消息中
         message += f"**{item_title}**\n\n{item_description}\n[Read more]({item_link})\n\n"
