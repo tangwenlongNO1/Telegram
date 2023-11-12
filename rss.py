@@ -21,7 +21,7 @@ rss_feed_url = 'https://www.141jav.com/feeds/'
 
 def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url)
-    items = feed.entries[:5]
+    items = feed.entries[:3]
     return items
 
 def send_message(items):
