@@ -1,4 +1,4 @@
-import feedparser
+# import feedparser
 import requests
 import os
 
