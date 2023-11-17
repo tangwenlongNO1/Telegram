@@ -44,5 +44,6 @@ def send_message(message):
 #     return response.json()
 
 if __name__ == "__main__":
+    url = 'https://www.dmoe.cc/random.php'
     # latest_article = fetch_latest_items()
     send_message(url)
