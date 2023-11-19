@@ -2,7 +2,7 @@ name: rss 141 test
 
 on:
   schedule: 
-    - cron: '0 7 * * *'
+    - cron: '0 7 * * 3'
 
   workflow_dispatch:
 
@@ -28,5 +28,5 @@ jobs:
         python 141.py
 env:
   TG_TOKEN: ${{ secrets.TOKEN }}
-  TG_CHAT_ID: ${{ secrets.CHANNEL_ID }}
+  TG_CHAT_ID: ${{ secrets.CHANNEL_ID_GAOQING }}
   token: ${{ secrets.PAT }}
