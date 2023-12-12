@@ -10,7 +10,7 @@ username = "tangwenlongNO1"
 repo = g.get_user(username).get_repo(repo_name)
 
 # 获取当前最新版本的 Clash For Windows Chinese_patch 下载链接和更新日志
-response = requests.get("https://api.github.com/repos/BoyceLig/Clash_Chinese_Patch/releases/latest")
+response = requests.get("https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest")
 print(response.status_code)
 data = response.json()
 latest_version = data['tag_name']
@@ -27,7 +27,7 @@ current_version = os.getenv('version')
 telegram_api_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
 if latest_version != current_version:
     
-    message_text = f"🎉*Clash For Windows 汉化包 更新至 {latest_version}*\n*汉化方法：*\n\n下载 `app.7z` 或 `app.zip` 文件(*两个压缩包内容一样*)后，解压压缩包，请自行替换下列路径中的 `app.asar` 文件\n\n`Clash for Windows\\resources\\app.asar`\n\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
+    message_text = f"🎉*Clash-verge-rev 更新至 {latest_version}*\n*汉化方法：*\n\n下载 `app.7z` 或 `app.zip` 文件(*两个压缩包内容一样*)后，解压压缩包，请自行替换下列路径中的 `app.asar` 文件\n\n`Clash for Windows\\resources\\app.asar`\n\n[下载链接](https://github.com/BoyceLig/Clash_Chinese_Patch/releases/latest)"
     params = {
         "chat_id":telegram_chat_id,
         "text":message_text,
