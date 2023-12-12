@@ -1,8 +1,8 @@
-name: Clash-for-Windows Chinese patch Update Check
+name: Clash-verge-rev Update Check
 
 on:
-  # schedule: 
-  #   - cron: '0 2/2 * * *'
+  schedule: 
+    - cron: '0 3/2 * * *'
 
   workflow_dispatch:
 
