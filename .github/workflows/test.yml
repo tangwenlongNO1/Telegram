@@ -21,7 +21,7 @@ jobs:
         python-version: 3.8
 
     - name: Install requirements
-      run: pip install requests feedparser BeautifulSoup
+      run: pip install requests feedparser beautifulsoup4
 
     - name: Run Python Script
       run: 
