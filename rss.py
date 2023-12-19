@@ -1,6 +1,7 @@
 import feedparser
 import requests
 import os
+import BeautifulSoup
 
 # 你的Telegram Bot API令牌
 telegram_bot_token = os.environ.get('TG_TOKEN')
