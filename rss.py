@@ -23,7 +23,7 @@ def fetch_latest_items():
     #     return f"{first_image_url}"
     # else:
     #     return None
-    return f"{latest_entry.description[10:-5]}"
+    return f"{latest_entry.description[10:-4]}"
 
 def send_message(message):
     url = f'https://api.telegram.org/bot{telegram_bot_token}/sendPhoto'
