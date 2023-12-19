@@ -57,4 +57,4 @@ def send_message(message):
 if __name__ == "__main__":
     latest_article = fetch_latest_items()
     print(latest_article)
-    send_message(latest_article)
+    send_message("https://cdn.zzdaye.com:8443/images/c/f/3/cf39da30-f850-11ec-94cf-378d72040daf.jpg")
