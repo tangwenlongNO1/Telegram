@@ -9,28 +9,28 @@ telegram_chat_id = os.environ.get('TG_CHAT_ID')
 # RSS订阅的URL
 rss_feed_url = 'https://www.141jav.com/feeds/'
 rss_feed_url1 = 'https://rsshub.app/1x/latest'
-rss_feed_url2 = 'https://rsshub.app/95mm/tag/%E9%BB%91%E4%B8%9D'
+rss_feed_url2 = 'https://rsshub.app/tits-guru/model/mila-azul'
 
 def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url2)
     latest_entry = feed.entries[0]
-    soup = BeautifulSoup(latest_entry.description, 'html.parser')
-    first_image = soup.find('img')
+    # soup = BeautifulSoup(latest_entry.description, 'html.parser')
+    # first_image = soup.find('img')
     
-    # 获取第一张图片链接
-    if first_image:
-        first_image_url = first_image['src']
-        return f"{first_image_url}"
-    else:
-        return None
-    # return f"{latest_entry.description[10:-4]}"
+    # # 获取第一张图片链接
+    # if first_image:
+    #     first_image_url = first_image['src']
+    #     return f"{first_image_url}"
+    # else:
+    #     return None
+    return f"{latest_entry.description[10:-5]}"
 
 def send_message(message):
     url = f'https://api.telegram.org/bot{telegram_bot_token}/sendPhoto'
     params = {'chat_id': telegram_chat_id, 'photo': message}
     response = requests.post(url, params=params)
-    print(response.json())
-    print(response.status_code)
+    # print(response.json())
+    # print(response.status_code)
     return response.json()
 
 # def fetch_latest_items():
@@ -56,5 +56,5 @@ def send_message(message):
 
 if __name__ == "__main__":
     latest_article = fetch_latest_items()
-    print(latest_article)
-    send_message("https://seuppcdn01.1x.com/images/user/da1c72eaf00475fc4967e5ff1eae1d04-hd2.jpg")
+    # print(latest_article)
+    send_message(latest_article)
