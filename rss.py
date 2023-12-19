@@ -20,7 +20,7 @@ def fetch_latest_items():
     # 获取第一张图片链接
     if first_image:
         first_image_url = first_image['src']
-        return first_image_url
+        return f"{first_image_url}"
     else:
         return None
     # return f"{latest_entry.description[10:-4]}"
