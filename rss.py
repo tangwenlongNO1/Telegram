@@ -2,6 +2,7 @@ import feedparser
 import requests
 import os
 from bs4 import BeautifulSoup
+import random
 
 # 你的Telegram Bot API令牌
 telegram_bot_token = os.environ.get('TG_TOKEN')
@@ -15,17 +16,20 @@ def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url2)
     latest_entry = feed.entries[0]
     soup = BeautifulSoup(latest_entry.description, 'html.parser')
-    first_image = soup.find('img')
+    first_image = soup.find_all('img')
 
     
     
     # 获取第一张图片链接
-    if first_image:
-        first_image_url = first_image['src']
-        print(first_image_url)
-        return f"{first_image_url}"
+    image_urls = [img['src'] for img in first_image]
+    
+    # 随机选择一张图片链接
+    if image_urls:
+        random_image_url = random.choice(image_urls)
+        print(random_image_url)
+        return random_image_url
     else:
-         return None
+        return None
     # return f"{latest_entry.description[10:-4]}"
 
 def send_message(message):
