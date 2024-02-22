@@ -30,7 +30,7 @@ if latest_version != current_version:
     message_text = f"🎉*Clash-verge-rev 更新至 {latest_version}*\n{latest_changelog}\n[下载链接](https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)"
     params = {
         "chat_id":telegram_chat_id,
-        "text":message_text,
+        "text":"1",
         "parse_mode":'Markdown',
         "disable_web_page_preview":True
 
