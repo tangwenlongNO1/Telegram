@@ -26,8 +26,8 @@ def fetch_latest_items():
     # 随机选择一张图片链接
     if image_urls:
         random_image_url = random.choice(image_urls)
-        print(random_image_url)
-        return random_image_url
+        print(random_image_url[21:])
+        return random_image_url[21:]
     else:
         return None
     # return f"{latest_entry.description[10:-4]}"
