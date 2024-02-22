@@ -16,7 +16,7 @@ data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
 latest_changelog = data['body']
-print(latest_changelog.encode('utf-8').decode('utf-8'))
+print(latest_changelog)
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
 sha = dt['sha']
@@ -31,15 +31,15 @@ if latest_version != current_version:
     message_text = f"🎉*Clash-verge-rev 更新至 {latest_version}*\n{latest_changelog}\n[下载链接](https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)"
     params = {
         "chat_id":telegram_chat_id,
-        "text":"1",
+        "text":message_text,
         "parse_mode":'Markdown',
         "disable_web_page_preview":True
 
     }
-    # response = requests.post(telegram_api_url, data=params)
-    # print(response.status_code)
-    # with open('.env', 'w') as f:
-    #     f.write(f"version={latest_version}")
-    # with open('.env', 'r') as f:
-    #     contents = f.read()
-    # repo.update_file(".env", "update .env", contents, sha, branch="master")
+    response = requests.post(telegram_api_url, data=params)
+    print(response.status_code)
+    with open('.env', 'w') as f:
+        f.write(f"version={latest_version}")
+    with open('.env', 'r') as f:
+        contents = f.read()
+    repo.update_file(".env", "update .env", contents, sha, branch="master")
