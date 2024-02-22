@@ -15,8 +15,7 @@ print(response.status_code)
 data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
-latest_changelog = data['body'].encode('utf-8')  # 编码为 UTF-8
-print(latest_changelog.decode('utf-8'))
+latest_changelog = data['body']
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
 sha = dt['sha']
