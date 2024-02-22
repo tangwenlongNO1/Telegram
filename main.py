@@ -16,6 +16,7 @@ data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
 latest_changelog = data['body']
+print(latest_changelog[:23])
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
 sha = dt['sha']
@@ -35,8 +36,8 @@ if latest_version != current_version:
         "disable_web_page_preview":True
 
     }
-    response = requests.post(telegram_api_url, data=params)
-    print(response.status_code)
+    # response = requests.post(telegram_api_url, data=params)
+    # print(response.status_code)
     # with open('.env', 'w') as f:
     #     f.write(f"version={latest_version}")
     # with open('.env', 'r') as f:
