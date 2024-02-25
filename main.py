@@ -17,9 +17,9 @@ data = response.json()
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
 print(latest_download_url)
-latest_changelog = data['body'].encode('utf-8').decode('unicode_escape')
-# latest_changelog = data.get('body')
-print(latest_changelog)
+# latest_changelog = data['body'].encode('utf-8').decode('unicode_escape')
+latest_changelog = "更新日志见下载链接页面"
+# print(latest_changelog)
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
 sha = dt['sha']
