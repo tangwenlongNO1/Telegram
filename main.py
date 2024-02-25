@@ -13,7 +13,7 @@ repo = g.get_user(username).get_repo(repo_name)
 response = requests.get("https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest")
 print(response.status_code)
 data = response.json()
-print(data)
+# print(data)
 latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
 print(latest_download_url)
