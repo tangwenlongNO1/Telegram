@@ -10,7 +10,7 @@ telegram_chat_id = os.environ.get('TG_CHAT_ID')
 # RSS订阅的URL
 rss_feed_url = 'https://www.141jav.com/feeds/'
 rss_feed_url1 = 'https://rsshub.app/1x/latest'
-rss_feed_url2 = 'https://rsshub.app/jandan/top'
+rss_feed_url2 = 'https://rsshub.app/wallhaven/search/q=black+silk&categories=001&purity=010&sorting=relevance&order=desc&ai_art_filter=1'
 
 def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url2)
