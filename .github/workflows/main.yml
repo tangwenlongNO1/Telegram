@@ -28,5 +28,5 @@ jobs:
         python main.py
 env:
   TG_TOKEN: ${{ secrets.TOKEN }}
-  TG_CHAT_ID: ${{ secrets.CHANNEL_ID_CLASH }}
+  TG_CHAT_ID: ${{ secrets.CHANNEL_ID }}
   token: ${{ secrets.PAT }}
