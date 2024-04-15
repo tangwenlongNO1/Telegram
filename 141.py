@@ -1,36 +1,56 @@
 import feedparser
 import requests
 import os
+from bs4 import BeautifulSoup
+import random
 
 # 你的Telegram Bot API令牌
 telegram_bot_token = os.environ.get('TG_TOKEN')
 telegram_chat_id = os.environ.get('TG_CHAT_ID')
 # RSS订阅的URL
-rss_feed_url = 'https://www.141jav.com/feeds/'
-
-
 
 def fetch_latest_items():
-    feed = feedparser.parse(rss_feed_url)
-    items = feed.entries[:3]
-    return items
+    url2 = "https://bbs.kv8q4.com/2048/thread.php?fid=27"
 
-def send_message(items):
-    message = ""
-    for item in items:
-        item_title = item.title
-        item_link = item.link
-        item_description = item.description # if hasattr(item, 'description') else ""
-        
-        # 将每个项的标题、链接和描述添加到消息中
-        message += f"*{item_title}*\n\n🧩 {item_description}\n[Read more]({item_link})\n\n"
+    # 发送请求并获取页面内容
+    response = requests.get(url2)
+    html_content = response.text
+    
+    # 使用 BeautifulSoup 解析 HTML
+    soup = BeautifulSoup(html_content, "html.parser")
+    
+    # 找到所有图片标签
+    # img_tags = soup.find_all("img", class_="preview-img")
+    
+    read_links = soup.find_all("a", href=lambda href: href and href.startswith("read"))
+    
+    # 输出找到的链接
+    # for link in read_links:
+    # print("https://bbs.kv8q4.com/2048/" + link["href"])
+    link = read_links[15]
+    url = "https://bbs.kv8q4.com/2048/" + link["href"]
+    
+    response = requests.get(url)
+    html_content = response.text
+    
+    # 使用 BeautifulSoup 解析 HTML
+    soup = BeautifulSoup(html_content, "html.parser")
+    
+    # 找到所有图片标签
+    img_tags = soup.find_all("img", class_="preview-img")
+    
+    return img_tags[0]["src"]
 
-    # 发送合并的消息
-    url = f'https://api.telegram.org/bot{telegram_bot_token}/sendMessage'
-    params = {'chat_id': telegram_chat_id, 'text': message, 'parse_mode': 'Markdown', 'disable_web_page_preview': False}
+
+def send_message(message):
+    url = f'https://api.telegram.org/bot{telegram_bot_token}/sendPhoto'
+    params = {'chat_id': telegram_chat_id, 'photo': message}
     response = requests.post(url, params=params)
+    # print(response.json())
+    # print(response.status_code)
     return response.json()
 
 if __name__ == "__main__":
     latest_article = fetch_latest_items()
+    print(latest_article)
     send_message(latest_article)
