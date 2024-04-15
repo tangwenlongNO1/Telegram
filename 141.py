@@ -3,6 +3,8 @@ import requests
 import os
 from bs4 import BeautifulSoup
 import random
+from io import BytesIO
+from PIL import Image
 
 # 你的Telegram Bot API令牌
 telegram_bot_token = os.environ.get('TG_TOKEN')
