@@ -39,7 +39,7 @@ def fetch_latest_items():
     # 找到所有图片标签
     img_tags = soup.find_all("img", class_="preview-img")
     
-    return img_tags[0]["src"]
+    return img_tags[1]["src"]
 
 
 def send_message(message):
