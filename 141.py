@@ -38,8 +38,22 @@ def fetch_latest_items():
     
     # 找到所有图片标签
     img_tags = soup.find_all("img", class_="preview-img")
+    # res = ""
+    for i in range(len(img_tags)):
+        response = requests.get(img_tags[i]["src"])
+        image_content = response.content
+        
+        # 使用 PIL 打开图片
+        image = Image.open(BytesIO(image_content))
+        
+        # 获取图片的宽度和高度
+        image_width, image_height = image.size
+        if image_width + image_height < 10000:
+            res = img_tags[i]["src"]
+            break
+            
     
-    return img_tags[1]["src"]
+    return res
 
 
 def send_message(message):
