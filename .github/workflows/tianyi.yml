@@ -21,7 +21,7 @@ jobs:
         python-version: 3.8
 
     - name: Install requirements
-      run: pip install requests 
+      run: pip install requests rsa
 
 
     - name: Run Python Script
