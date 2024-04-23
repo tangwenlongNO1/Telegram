@@ -1,0 +1,31 @@
+name: tianyidrivercheckin
+
+on:
+  schedule: 
+    - cron: '0 3/2 * * *'
+
+  workflow_dispatch:
+
+
+jobs:
+  update:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install requirements
+      run: pip install requests python-dotenv PyGithub
+
+    - name: Run Python Script
+      run: 
+        python tianyi.py
+env:
+  USERNAME: ${{ secrets.USERNAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
