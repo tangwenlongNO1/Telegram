@@ -21,7 +21,7 @@ jobs:
         python-version: 3.8
 
     - name: Install requirements
-      run: pip install time re json base64 hashlib urllib hmac rsa requests random
+      run: pip install re json base64 hashlib urllib hmac rsa requests random
 
 
     - name: Run Python Script
