@@ -14,6 +14,7 @@ import urllib.parse,hmac
 import rsa
 import requests
 import random
+import os
  
 BI_RM = list("0123456789abcdefghijklmnopqrstuvwxyz")
  
