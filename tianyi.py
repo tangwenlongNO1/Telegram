@@ -14,6 +14,7 @@ import urllib.parse,hmac
 import rsa
 import requests
 import random
+import os
  
 BI_RM = list("0123456789abcdefghijklmnopqrstuvwxyz")
  
@@ -22,8 +23,8 @@ B64MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 s = requests.Session()
  
 # 在下面两行的引号内贴上账号（仅支持手机号）和密码
-username = "15399986397"
-password = "102841nG@"
+username = os.environ.get('USERNAME')
+password = os.environ.get('PASSWORD')
  
 _ = """
 if(username == "" or password == ""):
