@@ -25,7 +25,7 @@ def fetch_latest_items():
     # img_tags = soup.find_all("img", class_="preview-img")
     
     read_links = soup.find_all("a", href=lambda href: href and href.startswith("read"))
-    print(read_links)
+    # print(read_links)
     
     # 输出找到的链接
     # for link in read_links:
@@ -41,8 +41,8 @@ def fetch_latest_items():
     
     # 找到所有图片标签
     img_tags = soup.find_all("img", class_="preview-img")
-    print(img_tags)
-    res = ""
+    # print(img_tags)
+    # res = ""
     for i in range(len(img_tags)):
         response = requests.get(img_tags[i]["src"])
         image_content = response.content
