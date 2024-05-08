@@ -40,7 +40,7 @@ def fetch_latest_items():
     
     # 找到所有图片标签
     img_tags = soup.find_all("img", class_="preview-img")
-    # res = ""
+    res = ""
     for i in range(len(img_tags)):
         response = requests.get(img_tags[i]["src"])
         image_content = response.content
