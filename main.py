@@ -18,7 +18,7 @@ latest_version = data['tag_name']
 latest_download_url = data['assets'][1]['browser_download_url']
 print(latest_download_url)
 latest_changelog = data['body']
-# latest_changelog = "更新日志见下载链接页面"
+latest_changelog = latest_changelog.replace("_", "\_")
 # print(latest_changelog)
 re = requests.get("https://api.github.com/repos/tangwenlongNO1/Telegram/contents/.env")
 dt = re.json()
@@ -34,7 +34,7 @@ if latest_version != current_version:
     message_text = f"🎉*Clash-verge-rev 更新至 {latest_version}*\n{latest_changelog}\n\n[下载链接](https://github.com/clash-verge-rev/clash-verge-rev/releases/tag/{latest_version})"
     params = {
         "chat_id":telegram_chat_id,
-        "text":message_text.replace("_", "\_"),
+        "text":message_text,
         "parse_mode":'Markdown',
         "disable_web_page_preview":True
     
