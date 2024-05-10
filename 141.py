@@ -21,6 +21,7 @@ def fetch_latest_items():
     
     # 使用 BeautifulSoup 解析 HTML
     soup = BeautifulSoup(html_content, "html.parser")
+    print(soup)
     
     # 找到所有图片标签
     # img_tags = soup.find_all("img", class_="preview-img")
