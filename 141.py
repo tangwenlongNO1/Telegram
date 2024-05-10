@@ -16,12 +16,12 @@ def fetch_latest_items():
 
     # 发送请求并获取页面内容
     response = requests.get(url2)
-    html_content = response.content
-    print(html_content)
+    html_content = response.text
+    # print(html_content)
     
     # 使用 BeautifulSoup 解析 HTML
     soup = BeautifulSoup(html_content, "html.parser")
-    print(soup)
+    # print(soup)
     
     # 找到所有图片标签
     # img_tags = soup.find_all("img", class_="preview-img")
