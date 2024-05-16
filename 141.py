@@ -17,6 +17,8 @@ def fetch_latest_items():
     # 发送请求并获取页面内容
     response = requests.get(url2)
     html_content = response.text
+    print(response.status_code)
+    
     # print(html_content)
     
     # 使用 BeautifulSoup 解析 HTML
