@@ -38,6 +38,7 @@ def fetch_latest_items():
     
     response = requests.get(url)
     html_content = response.text
+    print(response.status_code)
     
     # 使用 BeautifulSoup 解析 HTML
     soup = BeautifulSoup(html_content, "html.parser")
