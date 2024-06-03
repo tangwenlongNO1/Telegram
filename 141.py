@@ -11,57 +11,27 @@ telegram_bot_token = os.environ.get('TG_TOKEN')
 telegram_chat_id = os.environ.get('TG_CHAT_ID')
 # RSS订阅的URL
 
-def fetch_latest_items():
-    url2 = "https://bbs.kv8q4.com/2048/thread.php?fid=27"
+rss_feed_url2 = "https://rsshub.app/2048/27"
 
-    # 发送请求并获取页面内容
-    response = requests.get(url2)
-    html_content = response.text
+def fetch_latest_items():
+    feed = feedparser.parse(rss_feed_url2)
+    latest_entry = feed.entries[random.randint(0, len(feed.entries) - 1)]
+    soup = BeautifulSoup(latest_entry.description, 'html.parser')
+    first_image = soup.find_all('img')
+
     
-    # print(html_content)
     
-    # 使用 BeautifulSoup 解析 HTML
-    soup = BeautifulSoup(html_content, "html.parser")
-    # print(soup)
+    # 获取第一张图片链接
+    image_urls = [img['src'] for img in first_image]
     
-    # 找到所有图片标签
-    # img_tags = soup.find_all("img", class_="preview-img")
-    
-    read_links = soup.find_all("a", href=lambda href: href and href.startswith("read"))
-    # print(read_links)
-    
-    # 输出找到的链接
-    # for link in read_links:
-    # print("https://bbs.kv8q4.com/2048/" + link["href"])
-    link = read_links[15]
-    url = "https://bbs.kv8q4.com/2048/" + link["href"]
-    
-    response = requests.get(url)
-    html_content = response.text
-    print(response.status_code)
-    
-    # 使用 BeautifulSoup 解析 HTML
-    soup = BeautifulSoup(html_content, "html.parser")
-    
-    # 找到所有图片标签
-    img_tags = soup.find_all("img", class_="preview-img")
-    # print(img_tags)
-    # res = ""
-    for i in range(len(img_tags)):
-        response = requests.get(img_tags[i]["src"])
-        image_content = response.content
-        
-        # 使用 PIL 打开图片
-        image = Image.open(BytesIO(image_content))
-        
-        # 获取图片的宽度和高度
-        image_width, image_height = image.size
-        if image_width + image_height < 10000:
-            res = img_tags[i]["src"]
-            break
-            
-    
-    return res
+    # 随机选择一张图片链接
+    if image_urls:
+        random_image_url = random.choice(image_urls)
+        print(random_image_url)
+        return random_image_url
+    else:
+        return None
+    # return f"{latest_entry.description[10:-4]}"
 
 
 def send_message(message):
