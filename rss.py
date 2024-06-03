@@ -13,7 +13,11 @@ rss_feed_url1 = 'https://rsshub.app/1x/latest'
 rss_feed_url2 = 'https://rsshub.app/wallhaven/search/q=black+silk&categories=001&purity=010&sorting=relevance&order=desc&ai_art_filter=1'
 
 def fetch_latest_items():
-    feed = feedparser.parse(rss_feed_url2)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    }
+    feed = feedparser.parse(rss_feed_url2, request_headers=headers)
+    # feed = feedparser.parse(rss_feed_url2)
     print(feed)
     latest_entry = feed.entries[random.randint(0, len(feed.entries) - 1)]
     soup = BeautifulSoup(latest_entry.description, 'html.parser')
