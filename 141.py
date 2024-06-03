@@ -14,8 +14,12 @@ telegram_chat_id = os.environ.get('TG_CHAT_ID')
 rss_feed_url2 = "https://rsshub.app/2048/27"
 
 def fetch_latest_items():
-    feed = feedparser.parse(rss_feed_url2)
-    latest_entry = feed.entries[0]
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    }
+    
+    feed = feedparser.parse(rss_feed_url2, request_headers=headers)
+    latest_entry = feed.entries[random.randint(0, len(feed.entries) - 1)]
     soup = BeautifulSoup(latest_entry.description, 'html.parser')
     first_image = soup.find_all('img')
 
