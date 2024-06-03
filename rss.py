@@ -14,6 +14,7 @@ rss_feed_url2 = 'https://rsshub.app/wallhaven/search/q=black+silk&categories=001
 
 def fetch_latest_items():
     feed = feedparser.parse(rss_feed_url2)
+    print(feed)
     latest_entry = feed.entries[random.randint(0, len(feed.entries) - 1)]
     soup = BeautifulSoup(latest_entry.description, 'html.parser')
     first_image = soup.find_all('img')
