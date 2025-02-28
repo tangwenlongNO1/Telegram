@@ -1,8 +1,8 @@
 name: Clash-verge-rev Update Check
 
-# on:
-#   schedule: 
-#     - cron: '0 3/2 * * *'
+on:
+  # schedule: 
+  #   - cron: '0 3/2 * * *'
 
   workflow_dispatch:
 
